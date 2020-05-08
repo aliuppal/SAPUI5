@@ -1,0 +1,73 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout"
+xmlns:vbm="sap.ui.vbm"
+		controllerName="zcoronadashb.main" xmlns:html="http://www.w3.org/1999/xhtml">
+		<l:FixFlex class="fixFlexFixedSize">
+		<l:fixContent>
+			<Panel expandable="true" expanded="{= !${device>/system/phone} }"
+				headerText="Covid19 Dashboard">
+				<headerToolbar>
+					<Toolbar>
+						<Title text="Covid19 Dashboard" />
+						<ToolbarSpacer />
+						<!-- <Button id="btnLegend" icon="sap-icon://legend" press="onPressLegend"
+							tooltip="Hide legend" />
+						<Button id="btnResize" icon="sap-icon://resize" press="onPressResize"
+							tooltip="Minimize" /> -->
+					</Toolbar>
+				</headerToolbar>
+				<content>
+					<VBox class="sapUiTinyMargin">
+						<Text
+							text="This demo dashboard is created for showing covid19 cases. " />
+					</VBox>
+				</content>
+			</Panel>
+		</l:fixContent>
+		<l:flexContent>
+			<vbm:AnalyticMap id="vbi" width="100%" xmlns:l="sap.ui.layout"
+				height="100%" initialPosition="0;10;0" regionClick="onRegionClick"
+				regionContextMenu="onRegionContextMenu">
+				<vbm:vos>
+					<vbm:Circles items="{/Circles}" click="onClickItem"
+						contextMenu="onContextMenuItem">
+						<vbm:Circle position="{pos}" tooltip="{tooltip}"
+							radius="{radius}" color="rgba(92,186,230,0.6)" colorBorder="rgb(255,255,255)"
+							hotDeltaColor="rgba(92,186,230,0.8)" click="onClickCircle"
+							contextMenu="onContextMenuCircle" />
+					</vbm:Circles>
+				</vbm:vos>
+				<vbm:legend>
+					<vbm:Legend id="legend" caption="Cases">
+						<vbm:LegendItem text="More than 100k cases" color="rgba(92,186,230,0.6)" />
+					</vbm:Legend>
+				</vbm:legend>
+			</vbm:AnalyticMap>
+		</l:flexContent>
+	</l:FixFlex>
+	
+		<Dialog id="dialog">	
+		
+		<l:Grid containerQuery="true" class="sapUiSmallMarginTop">
+		<TileContent  footer="Confirmed Cases" class="sapUiSmallMargin">
+			<NumericContent id="totalConfirmed" truncateValueTo="15"
+				valueColor="Critical"  />
+		</TileContent>
+		
+		<TileContent  footer="Deaths" class="sapUiSmallMargin">
+			<NumericContent id="totalDeath" truncateValueTo="15"
+				valueColor="Error"  />
+		</TileContent>
+		
+		<TileContent footer="Recovered"  class="sapUiSmallMargin">
+			<NumericContent id="totalRecovered" truncateValueTo="15"
+				valueColor="Good" />
+		</TileContent>
+		
+	</l:Grid>
+	
+			<endButton>
+				<Button text="close" press="closeDialog"></Button>
+			</endButton>
+			</Dialog>
+	
+</core:View>
